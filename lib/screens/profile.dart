@@ -63,11 +63,28 @@ class Profile extends StatelessWidget {
                       style: GoogleFonts.lora(
                           fontSize: 20,
                           fontWeight: FontWeight.w400,
-                          color: secndthemeClr))
+                          color: secndthemeClr)),
                 ],
               ),
             ),
           ),
+          // Container(
+                  //   child: ListView(
+                  //     children: [
+                  //       ListTile(
+                  //         //privacy
+                  //         leading: Icon(Icons.privacy_tip_outlined,
+                  //         size: 20,
+                  //         ),
+                  //         title: Text("Privacy"),
+                  //         trailing: Icon(Icons.arrow_forward_ios),
+                  //       )
+                  //       //help&support
+                  //       //settings
+                  //       //share
+                  //     ],
+                  //   ),
+                  // )
         ],
       ),
     );
