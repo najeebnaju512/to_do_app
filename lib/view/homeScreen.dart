@@ -89,14 +89,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   margin: EdgeInsets.only(bottom: 20, right: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      _addTodoItem(_todocController.text);
+                      if (_todocController.text == "") {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Add any Todo Item"),
+                            backgroundColor: Colors.red[400],));
+                      } else {
+                        _addTodoItem(_todocController.text);
+                      }
                     },
                     child: Text(
                       "+",
                       style: TextStyle(fontSize: 40, color: Colors.white),
                     ),
                     style: ElevatedButton.styleFrom(
-                        primary: appbrthemeClr,
+                        backgroundColor: appbrthemeClr,
                         // minimumSize: Size(60, 60),
                         elevation: 10,
                         shape: RoundedRectangleBorder(
@@ -125,9 +131,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _addTodoItem(String todo) {
     setState(() {
+      // if (todo==null) {
+      //   SnackBar(content: Text("Add Todo Item"));
+      // } else {
       todoslist.add(TodoData(
           id: DateTime.now().millisecondsSinceEpoch.toString(),
           todotext: todo));
+      // }
     });
     _todocController.clear();
   }
