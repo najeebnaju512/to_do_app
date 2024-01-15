@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: primethemeClr,
       appBar: _buildAppbar(),
+      drawer: drawer(),
       body: Stack(
         children: [
           Container(
@@ -52,8 +53,70 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-
-
+  Drawer drawer() {
+    return Drawer(
+      backgroundColor: Colors.transparent,
+      elevation: 10,
+      // width: MediaQuery.sizeOf(context).width ,
+      shape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(25),
+              bottomRight: Radius.circular(25))),
+      child: ListView(
+        children: [
+          DrawerHeader(
+              child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black45,
+                        blurRadius: 5.0,
+                        spreadRadius: 1.0,
+                        offset: Offset(
+                            2.0, 2.0), // shadow direction: bottom right
+                      )
+                    ],
+                  ),
+                  child: CircleAvatar(
+                    child: Icon(
+                      Icons.person,
+                      size: 30,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  "UserName",
+                  style: GoogleFonts.pacifico(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: thirdthemeClr),
+                ),
+                // Text("email*****@gmail.com",
+                //     style: GoogleFonts.lora(
+                //         fontSize: 12,
+                //         fontWeight: FontWeight.w700,
+                //         color: secndthemeClr)),
+              ],
+            ),
+          )),
+          buildListTile(Icons.privacy_tip_outlined, "Privacy"),
+          buildListTile(Icons.help_outline, "Help&Support"),
+          buildListTile(Icons.settings, "Settings"),
+          buildListTile(Icons.share, "Share"),
+        ],
+      ),
+    );
+  }
 
   void _handleTodoChange(TodoData todoData) {
     setState(() {
@@ -113,13 +176,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar _buildAppbar() {
     return AppBar(
-      leading: IconButton(
-        onPressed: () {},
-        icon: Icon(
-          Icons.menu,
-          size: 30,
-        ),
-      ),
       title: Text("ToDo"),
       actions: [
         CircleAvatar(
@@ -214,6 +270,30 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
         ],
       ),
+    );
+  }
+
+  buildListTile(IconData iconname, String title) {
+    return Column(
+      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          titleAlignment: ListTileTitleAlignment.center,
+          tileColor: Colors.white38,
+          leading: Icon(iconname, size: 15),
+          title: Text(
+            title,
+            style: GoogleFonts.robotoSlab(
+                fontSize: 15, fontWeight: FontWeight.w400),
+          ),
+          trailing: Icon(Icons.arrow_forward_ios),
+        ),
+        SizedBox(height: 5,)
+      ],
     );
   }
 }
