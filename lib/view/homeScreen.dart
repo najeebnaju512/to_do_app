@@ -14,12 +14,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final todoslist = TodoData.todoList();
-  List<TodoData> _fountTodo = [];
+  List<TodoData> _foundTodo = [];
   final _todocController = TextEditingController();
 
   @override
   void initState() {
-    _fountTodo = todoslist;
+    _foundTodo = todoslist;
     super.initState();
   }
 
@@ -33,82 +33,17 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             padding: EdgeInsets.all(15),
             child: Column(
-              children: [
-                Searchbox(),
-                Expanded(
-                  child: ListView(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 20, bottom: 20),
-                        child: Text(
-                          "All ToDo's",
-                          style: GoogleFonts.whisper(
-                              letterSpacing: 2,
-                              fontSize: 25,
-                              fontWeight: FontWeight.w900,
-                              color: secndthemeClr),
-                        ),
-                      ),
-                      for (TodoData todoData in _fountTodo.reversed)
-                        TodoItem(
-                          todoo: todoData,
-                          onTodoChanged: _handleTodoChange,
-                          onDeleteItem: _deleteTodoItem,
-                        ),
-                    ],
-                  ),
-                )
-              ],
+              children: [_Searchbox(), _Listbody()],
             ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Row(
               children: [
-                Expanded(
-                    child: Container(
-                  margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black45,
-                          blurRadius: 10,
-                        )
-                      ]),
-                  child: TextField(
-                    controller: _todocController,
-                    decoration: InputDecoration(
-                        hintText: "Add New Todo Item",
-                        border: InputBorder.none),
-                  ),
-                )),
+                Expanded(child: _tododataEnterFeild()),
                 Container(
-                  margin: EdgeInsets.only(bottom: 20, right: 20),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_todocController.text == "") {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Add any Todo Item"),
-                            backgroundColor: Colors.red[400],));
-                      } else {
-                        _addTodoItem(_todocController.text);
-                      }
-                    },
-                    child: Text(
-                      "+",
-                      style: TextStyle(fontSize: 40, color: Colors.white),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: appbrthemeClr,
-                        // minimumSize: Size(60, 60),
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                  ),
-                )
+                    margin: EdgeInsets.only(bottom: 20, right: 20),
+                    child: addIcon())
               ],
             ),
           )
@@ -116,6 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+
+
 
   void _handleTodoChange(TodoData todoData) {
     setState(() {
@@ -131,13 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _addTodoItem(String todo) {
     setState(() {
-      // if (todo==null) {
-      //   SnackBar(content: Text("Add Todo Item"));
-      // } else {
       todoslist.add(TodoData(
           id: DateTime.now().millisecondsSinceEpoch.toString(),
           todotext: todo));
-      // }
     });
     _todocController.clear();
   }
@@ -155,11 +89,11 @@ class _HomeScreenState extends State<HomeScreen> {
           .toList();
     }
     setState(() {
-      _fountTodo = results;
+      _foundTodo = results;
     });
   }
 
-  Widget Searchbox() {
+  Widget _Searchbox() {
     return Container(
       padding: EdgeInsets.only(left: 15),
       decoration: BoxDecoration(
@@ -208,6 +142,78 @@ class _HomeScreenState extends State<HomeScreen> {
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(25),
               bottomRight: Radius.circular(25))),
+    );
+  }
+
+  Widget _tododataEnterFeild() {
+    return Container(
+      margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black45,
+              blurRadius: 10,
+            )
+          ]),
+      child: TextField(
+        controller: _todocController,
+        decoration: InputDecoration(
+            hintText: "Add New Todo Item", border: InputBorder.none),
+      ),
+    );
+  }
+
+  Widget addIcon() {
+    return ElevatedButton(
+      onPressed: () {
+        if (_todocController.text == "") {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Add any Todo Item"),
+            backgroundColor: Colors.red[400],
+          ));
+        } else {
+          _addTodoItem(_todocController.text);
+        }
+      },
+      child: Text(
+        "+",
+        style: TextStyle(fontSize: 40, color: Colors.white),
+      ),
+      style: ElevatedButton.styleFrom(
+          backgroundColor: appbrthemeClr,
+          // minimumSize: Size(60, 60),
+          elevation: 10,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+    );
+  }
+
+  Widget _Listbody() {
+    return Expanded(
+      child: ListView(
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 20, bottom: 20),
+            child: Text(
+              "All ToDo's",
+              style: GoogleFonts.whisper(
+                  letterSpacing: 2,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w900,
+                  color: secndthemeClr),
+            ),
+          ),
+          for (TodoData todoData in _foundTodo.reversed)
+            TodoItem(
+              todoo: todoData,
+              onTodoChanged: _handleTodoChange,
+              onDeleteItem: _deleteTodoItem,
+            ),
+        ],
+      ),
     );
   }
 }
