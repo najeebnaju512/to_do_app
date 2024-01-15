@@ -95,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 5,
                 ),
                 Text(
-                  "UserName",
+                  "Hi UserName",
                   style: GoogleFonts.pacifico(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
