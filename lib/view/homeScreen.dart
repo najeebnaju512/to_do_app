@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:to_do_app/screens/profile.dart';
+import 'package:to_do_app/view/profile.dart';
 import '../utils/colors.dart';
-import '../utils/toDoDatas.dart';
+import '../model/toDoDatas.dart';
 import '../widget/todoitem.dart';
 
 class HomeScreen extends StatefulWidget {
