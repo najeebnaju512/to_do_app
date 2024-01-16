@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_app/view/homeScreen.dart';
+import 'package:to_do_app/view/signIn.dart';
 
 void main() {
   runApp((MyApp()));
@@ -12,14 +12,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // SystemChrome.setSystemUIOverlayStyle(
-    //     SystemUiOverlayStyle(statusBarColor: Colors.transparent)); 
+    //     SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
     /*write the above code to make the status bar color same as appbar of the application
-     if both are diffrent */
+     if both are different */
 
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'ToDo Application',
-        home: HomeScreen());
+        home: SignIn());
   }
 }

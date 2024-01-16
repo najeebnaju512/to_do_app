@@ -60,8 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // width: MediaQuery.sizeOf(context).width ,
       shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.only(
-              topRight: Radius.circular(25),
-              bottomRight: Radius.circular(25))),
+              topRight: Radius.circular(25), bottomRight: Radius.circular(25))),
       child: ListView(
         children: [
           DrawerHeader(
@@ -79,8 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.black45,
                         blurRadius: 5.0,
                         spreadRadius: 1.0,
-                        offset: Offset(
-                            2.0, 2.0), // shadow direction: bottom right
+                        offset:
+                            Offset(2.0, 2.0), // shadow direction: bottom right
                       )
                     ],
                   ),
@@ -292,7 +291,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           trailing: Icon(Icons.arrow_forward_ios),
         ),
-        SizedBox(height: 5,)
+        SizedBox(
+          height: 5,
+        )
       ],
     );
   }
