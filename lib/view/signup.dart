@@ -39,7 +39,6 @@ class SignUp extends StatelessWidget {
                       ),
                       //card with transparent background
                       Card(
-                        elevation: 5,
                         color: Colors.transparent,
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
